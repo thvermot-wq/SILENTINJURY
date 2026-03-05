@@ -196,6 +196,17 @@ img,svg,video{max-width:100%; height:auto}
       align-items:center;
       margin-left:6px;
     }
+    .social-nav{display:flex; gap:6px; align-items:center}
+    .social-nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-size:13px;
+      padding:7px 9px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .social-nav a:hover{color:var(--text); background:rgba(255,255,255,.08)}
     .lang-btn{
       display:inline-flex;
       align-items:center;
@@ -475,6 +486,11 @@ img,svg,video{max-width:100%; height:auto}
         <a href="#photos">Galerie</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <div class="social-nav" aria-label="Réseaux sociaux">
+        <a href="https://www.instagram.com/silentinjuryofficiel/" target="_blank" rel="noopener" aria-label="Instagram">📸 IG</a>
+        <a href="https://www.facebook.com/silentinjuryofficiel" target="_blank" rel="noopener" aria-label="Facebook">👍 FB</a>
+      </div>
 
       <div class="lang-switch" aria-label="Langue">
         <a class="lang-btn is-active" href="./" aria-current="page" aria-label="Français" title="Français">
