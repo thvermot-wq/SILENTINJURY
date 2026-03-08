@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Silent Injury | Home Page</title>
   <meta name="description" content="Silent Injury Homepage — official home page: music, videos, live dates, press kit, tech rider and contact." />
-  <meta name="theme-color" content="#090a0d" />
+  <meta name="theme-color" content="#060608" />
   <link rel="canonical" href="https://thvermot-wq.github.io/SILENT-MINISITE/" />
   <link rel="alternate" hreflang="fr" href="https://thvermot-wq.github.io/SILENT-MINISITE/" />
   <link rel="alternate" hreflang="en" href="https://thvermot-wq.github.io/SILENT-MINISITE/en/" />
@@ -61,446 +61,1134 @@
   <link rel="icon" href="assets/logo.png" />
 
   <style>
+    /* Ajoute manuellement le fichier assets/fonts/Omicron.ttf dans le repo pour activer le titre du hero. */
+    @font-face {
+      font-family: "Omicron";
+      src: local("Omicron"), url("assets/fonts/Omicron.ttf") format("truetype");
+      font-display: swap;
+    }
+
     :root {
-      --bg: #090a0d;
-      --bg-soft: #13151a;
-      --panel: #1a1e25;
+      --bg: #060608;
+      --bg-deep: #0b0b0f;
+      --panel: #111217;
+      --panel-soft: #181a21;
       --line: rgba(255,255,255,.12);
-      --text: #f4f7ff;
-      --muted: #abb3c0;
-      --accent: #d11229;
-      --max-width: 1180px;
-      --radius: 14px;
+      --line-strong: rgba(255,255,255,.2);
+      --text: #f5f7fb;
+      --muted: #b6bcc9;
+      --muted-2: #8d94a3;
+      --accent: #cf1028;
+      --accent-soft: rgba(207,16,40,.18);
+      --max: 1240px;
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(0,0,0,.38);
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, #090a0d 0%, #0f1116 100%);
+      background:
+        radial-gradient(circle at top left, rgba(207,16,40,.08), transparent 28%),
+        linear-gradient(180deg, #050507 0%, #0a0a0e 60%, #050507 100%);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.45;
+      overflow-x: hidden;
     }
 
-    img { max-width: 100%; display: block; }
+    body.menu-open { overflow: hidden; }
+    img { display: block; max-width: 100%; }
     a { color: inherit; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    button, input, textarea { font: inherit; }
+    :focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 
     .container {
-      width: min(100% - 2rem, var(--max-width));
+      width: min(100% - 2rem, var(--max));
       margin-inline: auto;
     }
 
     .site-header {
       position: fixed;
       inset: 0 0 auto 0;
-      z-index: 30;
-      transition: background-color .25s ease, border-color .25s ease;
+      z-index: 50;
       border-bottom: 1px solid transparent;
+      transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
     }
+
     .site-header.is-scrolled {
-      background: rgba(9,10,13,.94);
-      border-bottom-color: var(--line);
-      backdrop-filter: blur(10px);
+      background: rgba(5,5,7,.84);
+      border-color: var(--line);
+      backdrop-filter: blur(14px);
     }
+
     .site-header__inner {
-      height: 76px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
 
-    .brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; }
-    .brand img { height: 38px; width: auto; }
-    .brand span { font-size: .85rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
-
-    .site-nav { display: none; gap: .2rem; align-items: center; }
-    .site-nav a {
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .85rem;
       text-decoration: none;
-      color: var(--muted);
-      font-size: .88rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .55rem .75rem;
-      border-radius: 999px;
+      min-width: 0;
     }
-    .site-nav a:hover { color: var(--text); background: rgba(255,255,255,.06); }
 
-    .menu-toggle {
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      opacity: .92;
+      filter: drop-shadow(0 0 14px rgba(255,255,255,.12));
+    }
+
+    .brand__meta {
+      display: grid;
+      gap: .08rem;
+    }
+
+    .brand__title {
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand__sub {
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .lang-link,
+    .menu-button {
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: .5rem;
-      width: 42px;
-      height: 42px;
-      background: rgba(0,0,0,.5);
+      background: rgba(255,255,255,.04);
       color: var(--text);
-      display: inline-grid;
-      place-items: center;
+      min-height: 44px;
+      padding: 0 .95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
       cursor: pointer;
+    }
+
+    .menu-button__bars {
+      display: inline-grid;
+      gap: 4px;
+    }
+
+    .menu-button__bars span {
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      display: block;
     }
 
     .menu-overlay {
       position: fixed;
       inset: 0;
-      z-index: 40;
-      background: rgba(9,10,13,.98);
-      display: none;
-      padding: 6rem 1.5rem 2rem;
-    }
-    .menu-overlay.is-open { display: block; }
-    .menu-overlay nav { display: grid; gap: .7rem; }
-    .menu-overlay a {
-      text-decoration: none;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      padding: .8rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .hero {
-      min-height: 100svh;
-      position: relative;
+      z-index: 60;
+      background:
+        linear-gradient(180deg, rgba(7,7,9,.96), rgba(7,7,9,.985)),
+        url('assets/gallery/09-silent-injury-live-scene-public-coulisses-noir-blanc.webp') center/cover no-repeat;
       display: grid;
       align-items: end;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.88)),
-        url('assets/hero.jpg') center/cover no-repeat;
-      padding: 7rem 0 3rem;
+      padding: clamp(6rem, 8vw, 7.5rem) 1.25rem 2rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .24s ease, visibility .24s ease;
     }
-    .hero::after {
+
+    .menu-overlay::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 20% 10%, rgba(209,18,41,.35), transparent 55%);
-      pointer-events: none;
-    }
-    .hero__content { position: relative; z-index: 1; max-width: 700px; }
-    .eyebrow {
-      margin: 0 0 .8rem;
-      font-size: .75rem;
-      color: #d8dcea;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 9vw, 4.8rem);
-      line-height: .95;
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-    .hero p {
-      margin: 1rem 0 1.7rem;
-      font-size: clamp(1rem, 3.1vw, 1.35rem);
-      color: #e7ebf5;
-      max-width: 48ch;
+      background: linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.9));
     }
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .menu-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .menu-overlay__inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1240px);
+      margin-inline: auto;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .menu-overlay__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .menu-label {
+      font-size: .74rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .menu-close {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .menu-nav {
+      display: grid;
+      gap: .35rem;
+      padding-bottom: 1rem;
+    }
+
+    .menu-nav a {
+      text-decoration: none;
+      font-size: clamp(1.8rem, 4vw, 3.4rem);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      padding: .3rem 0;
+      width: fit-content;
+    }
+
+    .menu-nav a:hover { color: #ffffff; }
+
+    .menu-overlay__footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: clip;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.88)),
+        linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.55) 34%, rgba(0,0,0,.12) 100%),
+        url('assets/gallery/15-silent-injury-live-arthur-delorme-thibault-vermot-vincent-louvel-groupe-noir-blanc.webp') center top / cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 16% 15%, rgba(207,16,40,.33), transparent 32%),
+        linear-gradient(180deg, rgba(0,0,0,.14), rgba(0,0,0,.36));
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 140px;
+      background: linear-gradient(180deg, transparent, #050507 85%);
+      pointer-events: none;
+    }
+
+    .hero__watermark {
+      position: absolute;
+      right: min(4vw, 3rem);
+      top: 18vh;
+      width: min(46vw, 520px);
+      opacity: .09;
+      filter: drop-shadow(0 0 25px rgba(255,255,255,.08));
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      padding: 8.2rem 0 3rem;
+      min-height: 100svh;
+      display: flex;
+      align-items: end;
+    }
+
+    .hero__content {
+      width: min(100%, 780px);
+      padding-bottom: clamp(1rem, 4vw, 3rem);
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #e8ebf2;
+      font-weight: 700;
+    }
+
+    .hero__title {
+      margin: 0;
+      font-family: "Omicron", "Orbitron", Inter, sans-serif;
+      font-size: clamp(3rem, 11vw, 8rem);
+      line-height: .88;
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: lowercase;
+      text-wrap: balance;
+      text-shadow: 0 0 28px rgba(255,255,255,.06);
+    }
+
+    .hero__dek {
+      max-width: 36ch;
+      margin: 1.1rem 0 0;
+      font-size: clamp(1.02rem, 2.2vw, 1.32rem);
+      color: #edf0f6;
+    }
+
+    .hero__meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 1.6rem 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 1.6rem;
+    }
+
     .cta {
+      min-height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: .82rem 1.25rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
+      gap: .55rem;
       text-decoration: none;
-      font-weight: 700;
-      letter-spacing: .03em;
-      padding: .8rem 1.2rem;
-      border: 1px solid var(--line);
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .76rem;
       background: rgba(255,255,255,.04);
-      min-height: 44px;
+      transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
     }
+
+    .cta:hover { transform: translateY(-1px); }
+
     .cta--primary {
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
+      box-shadow: 0 14px 40px rgba(207,16,40,.34);
+    }
+
+    .cta--ghost {
+      background: rgba(0,0,0,.22);
+      border-color: rgba(255,255,255,.24);
+    }
+
+    .scroll-anchor {
+      scroll-margin-top: 94px;
     }
 
     .section {
-      padding: clamp(2.5rem, 6vw, 5rem) 0;
-      border-top: 1px solid var(--line);
-    }
-    .section-title {
-      margin: 0 0 1.4rem;
-      font-size: clamp(1.4rem, 5vw, 2.4rem);
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-    .section-intro {
-      color: var(--muted);
-      margin: -.6rem 0 1.5rem;
-      max-width: 52ch;
+      position: relative;
+      padding: clamp(3.2rem, 7vw, 6rem) 0;
     }
 
-    .card-grid {
+    .section + .section { border-top: 1px solid var(--line); }
+
+    .section-heading {
       display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr;
+      gap: .8rem;
+      margin-bottom: 1.6rem;
     }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+
+    .section-kicker {
+      font-size: .72rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 3.15rem);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    .section-intro {
+      margin: 0;
+      max-width: 48ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .feature {
+      display: grid;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .feature__media,
+    .feature__copy,
+    .panel,
+    .tour-board,
+    .video-card,
+    .gallery-card,
+    .contact-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1rem;
+      box-shadow: var(--shadow);
     }
-    .card h3 { margin: 0 0 .35rem; font-size: 1.1rem; }
-    .card p { margin: 0 0 1rem; color: var(--muted); }
+
+    .feature__media {
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .feature__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    .feature__copy {
+      padding: clamp(1.35rem, 3vw, 2rem);
+      display: grid;
+      align-content: center;
+      gap: 1rem;
+    }
+
+    .feature__eyebrow,
+    .panel__eyebrow,
+    .video-card__eyebrow {
+      margin: 0;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 700;
+    }
+
+    .feature__title {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3.4rem);
+      line-height: .94;
+      text-transform: uppercase;
+    }
+
+    .feature__copy p,
+    .panel p,
+    .video-card p,
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .feature__stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-top: .2rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      padding: .55rem .85rem;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #eef2fb;
+    }
+
+    .tour-board {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.35rem, 3vw, 2rem);
+    }
+
+    .tour-board::before {
+      content: "";
+      position: absolute;
+      inset: auto -7% -34% auto;
+      width: min(48vw, 460px);
+      aspect-ratio: 1;
+      background: url('assets/logo-watermark.png') center/contain no-repeat;
+      opacity: .055;
+      pointer-events: none;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,.08));
+    }
+
+    .tour-board__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .tour-board__headline {
+      display: grid;
+      gap: .5rem;
+      max-width: 45rem;
+    }
 
     .tour-list {
       list-style: none;
-      margin: 0;
+      margin: .2rem 0 0;
       padding: 0;
       display: grid;
-      gap: .75rem;
-    }
-    .tour-list li {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: .85rem .9rem;
-      display: flex;
-      justify-content: space-between;
-      gap: .8rem;
-      flex-wrap: wrap;
-      background: rgba(255,255,255,.02);
+      gap: .85rem;
     }
 
-    .video-grid {
+    .tour-list li {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    .video-embed {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--line);
-    }
-    .video-embed iframe { width: 100%; height: 100%; border: 0; }
-
-    .about {
-      display: grid;
-      gap: 1rem;
+      gap: .25rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255,255,255,.1);
     }
 
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 2rem 0;
+    .tour-list li:first-child { border-top: 0; }
+
+    .tour-list strong {
+      font-size: .86rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .tour-list span {
       color: var(--muted);
     }
-    .footer-row {
+
+    .cards-4 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .panel {
+      padding: 1.2rem;
+      display: grid;
+      gap: .8rem;
+      min-height: 100%;
+    }
+
+    .panel h3,
+    .contact-card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .video-layout {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .video-card {
+      overflow: hidden;
+    }
+
+    .video-card__copy {
+      padding: 1rem 1.1rem 1.1rem;
+      display: grid;
+      gap: .7rem;
+    }
+
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      border: 0;
+      display: block;
+      background: #000;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      filter: contrast(1.03) brightness(.94);
+      transition: transform .35s ease;
+    }
+
+    .gallery-card:hover img { transform: scale(1.03); }
+
+    .about-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .about-copy p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 56ch;
+    }
+
+    .about-metrics {
+      display: grid;
+      gap: .75rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+      padding: 1rem;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.35rem;
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .about-photo {
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      min-height: 320px;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+      padding: 1.3rem;
+      display: grid;
+      gap: .85rem;
+      align-content: start;
+    }
+
+    .contact-actions {
       display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      margin-top: .2rem;
+    }
+
+    .contact-email {
+      word-break: break-word;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 1.8rem 0 2.3rem;
+      color: var(--muted);
+    }
+
+    .footer__row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .footer__social {
+      display: flex;
       gap: .8rem;
       flex-wrap: wrap;
     }
-    .social-links { display: flex; gap: .75rem; flex-wrap: wrap; }
-    .social-links a { text-decoration: none; }
 
-    @media (min-width: 760px) {
-      .menu-toggle { display: none; }
-      .site-nav { display: flex; }
-      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .about { grid-template-columns: 1.1fr .9fr; align-items: start; }
+    .footer__social a {
+      text-decoration: none;
+      font-size: .8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    @media (min-width: 720px) {
+      .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr); }
+    }
+
+    @media (min-width: 900px) {
+      .feature { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); }
+      .video-layout { grid-template-columns: minmax(0, 1.4fr) minmax(320px, .8fr); }
+      .tour-list li {
+        grid-template-columns: 190px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 1rem;
+      }
+      .tour-list li a { justify-self: end; }
+      .tour-board__grid { grid-template-columns: minmax(0, 1.3fr) minmax(360px, .9fr); align-items: start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
   <header class="site-header" id="siteHeader">
     <div class="container site-header__inner">
-      <a href="#top" class="brand" aria-label="Accueil Silent Injury">
-        <img src="assets/logo.png" alt="Silent Injury" />
-        <span>Metalcore · FR</span>
+      <a class="brand" href="#top" aria-label="Accueil Silent Injury">
+        <img src="assets/logo-watermark.png" alt="Logo Silent Injury" />
+        <span class="brand__meta">
+          <span class="brand__title">Silent Injury</span>
+          <span class="brand__sub">Metalcore · France</span>
+        </span>
       </a>
-      <nav class="site-nav" aria-label="Navigation principale">
+
+      <div class="header-actions">
+        <a class="lang-link" href="/SILENT-MINISITE/en/" aria-label="Version anglaise">EN</a>
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="menuOverlay" aria-label="Ouvrir le menu">
+          Menu
+          <span class="menu-button__bars" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-overlay__inner">
+      <div class="menu-overlay__top">
+        <span class="menu-label">Silent Injury</span>
+        <button class="menu-close" id="menuClose" type="button" aria-label="Fermer le menu">✕</button>
+      </div>
+
+      <nav class="menu-nav" aria-label="Navigation principale">
+        <a href="#top">Home</a>
         <a href="#release">Release</a>
         <a href="#tour">Tour</a>
         <a href="#music">Music</a>
         <a href="#videos">Videos</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact">EPK / Contact</a>
+        <a href="/SILENT-MINISITE/en/">English</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menuOverlay" aria-label="Ouvrir le menu">☰</button>
-    </div>
-  </header>
 
-  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
-    <nav aria-label="Menu mobile">
-      <a href="#release">Latest Release</a>
-      <a href="#tour">Tour</a>
-      <a href="#music">Music</a>
-      <a href="#videos">Videos</a>
-      <a href="#about">About</a>
-      <a href="#contact">EPK / Contact</a>
-      <a href="/SILENT-MINISITE/en/">English</a>
-    </nav>
+      <div class="menu-overlay__footer">
+        <span>Break The Mirror · official video online</span>
+        <div class="footer__social" aria-label="Réseaux sociaux">
+          <a href="https://www.instagram.com/silentinjury_band/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61552999371364" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <main id="top">
-    <section class="hero" aria-label="Hero">
-      <div class="container hero__content">
-        <p class="eyebrow">Silent Injury · New Era</p>
-        <h1>Silent Injury</h1>
-        <p>Metalcore frontal et mélodique. Nouveau set live. Nouveau cycle de sorties.</p>
-        <div class="cta-row">
-          <a class="cta cta--primary" href="https://www.youtube.com/watch?v=wf1ajH-h7EQ" target="_blank" rel="noopener">Watch latest video</a>
-          <a class="cta" href="mailto:silentinjuryofficiel@gmail.com?subject=Booking%20Silent%20Injury">Book the band</a>
+    <section class="hero scroll-anchor" aria-label="Hero">
+      <img class="hero__watermark" src="assets/logo-watermark.png" alt="" aria-hidden="true" />
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="eyebrow">Latest video · Break The Mirror</p>
+          <h1 class="hero__title">silent injury</h1>
+          <p class="hero__dek">Metalcore frontal et mélodique, refrains qui mordent, scène tendue. Nouveau cycle de sorties. Nouveau set live.</p>
+          <div class="hero__meta" aria-label="Informations rapides">
+            <span>France</span>
+            <span>Metalcore</span>
+            <span>Booking open</span>
+          </div>
+          <div class="cta-row">
+            <a class="cta cta--primary" href="https://www.youtube.com/watch?v=wf1ajH-h7EQ" target="_blank" rel="noopener">Watch video</a>
+            <a class="cta cta--ghost" href="#tour">View live section</a>
+            <a class="cta" href="mailto:silentinjuryofficiel@gmail.com?subject=Booking%20Silent%20Injury">Book the band</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="release" class="section">
+    <section id="release" class="section scroll-anchor">
       <div class="container">
-        <h2 class="section-title">Latest Release</h2>
-        <p class="section-intro">Single et clip “Break The Mirror” + album “Silent Injury”.</p>
-        <div class="card-grid">
-          <article class="card">
-            <h3>Break The Mirror</h3>
-            <p>Official music video en ligne.</p>
-            <a class="cta" href="https://www.youtube.com/watch?v=wf1ajH-h7EQ" target="_blank" rel="noopener">Open YouTube</a>
-          </article>
-          <article class="card">
-            <h3>Album “Silent Injury”</h3>
-            <p>Disponible en streaming et sur Bandcamp.</p>
-            <a class="cta" href="https://silentinjury.bandcamp.com/album/silent-injury" target="_blank" rel="noopener">Listen now</a>
+        <div class="section-heading">
+          <p class="section-kicker">Featured</p>
+          <h2 class="section-title">Latest release</h2>
+          <p class="section-intro">Un bloc clair, immédiat, au centre de la page : l’album, le clip, les liens qui comptent. Pas de détour inutile.</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__media">
+            <img src="assets/album-cover.jpg" alt="Pochette de l'album Silent Injury" loading="lazy" />
+          </div>
+
+          <article class="feature__copy">
+            <p class="feature__eyebrow">Break The Mirror · official music video</p>
+            <h3 class="feature__title">Silent Injury</h3>
+            <p>Le single et son clip ouvrent la page, comme chez les gros sites de groupes : un visuel fort, une accroche courte, puis l’action. Tu regardes, tu écoutes, tu passes au live.</p>
+            <div class="feature__stats" aria-label="Formats disponibles">
+              <span class="pill">YouTube</span>
+              <span class="pill">Bandcamp</span>
+              <span class="pill">Streaming</span>
+            </div>
+            <div class="cta-row">
+              <a class="cta cta--primary" href="https://www.youtube.com/watch?v=wf1ajH-h7EQ" target="_blank" rel="noopener">Open YouTube</a>
+              <a class="cta" href="https://silentinjury.bandcamp.com/album/silent-injury" target="_blank" rel="noopener">Listen now</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="tour" class="section">
+    <section id="tour" class="section scroll-anchor">
       <div class="container">
-        <h2 class="section-title">Tour</h2>
-        <p class="section-intro">Dates, villes, line-up. Mises à jour ici en priorité.</p>
-        <ul class="tour-list">
-          <li><strong>2025 · FR</strong><span>Nouvelles dates en préparation</span></li>
-          <li><strong>Booking</strong><span>silentinjuryofficiel@gmail.com</span></li>
-        </ul>
+        <div class="section-heading">
+          <p class="section-kicker">Live</p>
+          <h2 class="section-title">Tour</h2>
+          <p class="section-intro">Le bloc live doit être visible très tôt. Même sans calendrier rempli, on comprend tout de suite que le groupe est bookable.</p>
+        </div>
+
+        <section class="tour-board" aria-label="Informations live et booking">
+          <div class="tour-board__grid">
+            <div class="tour-board__headline">
+              <p class="panel__eyebrow">Booking / live / interviews</p>
+              <h3 class="feature__title" style="font-size:clamp(1.8rem,4vw,3rem);">New dates in preparation</h3>
+              <p>Silent Injury prépare la suite. Pour les salles, assos, festivals et médias, le point d’entrée doit être net : un bandeau live, une adresse, aucun flottement.</p>
+            </div>
+
+            <ul class="tour-list">
+              <li>
+                <strong>2025 · France</strong>
+                <span>Nouvelles dates en préparation</span>
+                <a class="cta" href="mailto:silentinjuryofficiel@gmail.com?subject=Date%20live%20Silent%20Injury">Ask for availabilities</a>
+              </li>
+              <li>
+                <strong>Booking</strong>
+                <span>silentinjuryofficiel@gmail.com</span>
+                <a class="cta cta--primary" href="mailto:silentinjuryofficiel@gmail.com?subject=Booking%20Silent%20Injury">Contact now</a>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </section>
 
-    <section id="music" class="section">
+    <section id="music" class="section scroll-anchor">
       <div class="container">
-        <h2 class="section-title">Music</h2>
-        <div class="card-grid">
-          <article class="card">
+        <div class="section-heading">
+          <p class="section-kicker">Platforms</p>
+          <h2 class="section-title">Music</h2>
+          <p class="section-intro">Des cartes simples, homogènes, sans bavardage. On clique et on écoute.</p>
+        </div>
+
+        <div class="cards-4">
+          <article class="panel">
+            <p class="panel__eyebrow">Streaming</p>
             <h3>Spotify</h3>
             <p>Catalogue complet Silent Injury.</p>
             <a class="cta" href="https://open.spotify.com/intl-fr/artist/3yQp4bKLIEdyO4jA6frSP8" target="_blank" rel="noopener">Open Spotify</a>
           </article>
-          <article class="card">
-            <h3>Apple Music / Deezer</h3>
-            <p>Écoute sur vos plateformes préférées.</p>
-            <div class="cta-row">
-              <a class="cta" href="https://music.apple.com/fr/album/silent-injury/1789094863" target="_blank" rel="noopener">Apple Music</a>
-              <a class="cta" href="https://www.deezer.com/fr/album/692870631" target="_blank" rel="noopener">Deezer</a>
+
+          <article class="panel">
+            <p class="panel__eyebrow">Support direct</p>
+            <h3>Bandcamp</h3>
+            <p>L’album complet, en direct depuis la page du groupe.</p>
+            <a class="cta" href="https://silentinjury.bandcamp.com/album/silent-injury" target="_blank" rel="noopener">Open Bandcamp</a>
+          </article>
+
+          <article class="panel">
+            <p class="panel__eyebrow">Library</p>
+            <h3>Apple Music</h3>
+            <p>Écoute et ajout à la bibliothèque iOS.</p>
+            <a class="cta" href="https://music.apple.com/fr/album/silent-injury/1789094863" target="_blank" rel="noopener">Open Apple Music</a>
+          </article>
+
+          <article class="panel">
+            <p class="panel__eyebrow">Library</p>
+            <h3>Deezer</h3>
+            <p>Accès Deezer pour le public français.</p>
+            <a class="cta" href="https://www.deezer.com/fr/album/692870631" target="_blank" rel="noopener">Open Deezer</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos" class="section scroll-anchor">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Watch</p>
+          <h2 class="section-title">Videos</h2>
+          <p class="section-intro">Une grande vidéo mise en avant, puis un second bloc plus brut pour le contenu embarqué du site.</p>
+        </div>
+
+        <div class="video-layout">
+          <article class="video-card">
+            <iframe class="video-frame" src="https://www.youtube.com/embed/wf1ajH-h7EQ" title="Break The Mirror (Official Video)" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="video-card__copy">
+              <p class="video-card__eyebrow">Official video</p>
+              <h3>Break The Mirror</h3>
+              <p>Le clip doit exister comme une destination évidente. Ici, il est traité comme l’objet principal du bloc.</p>
+              <a class="cta cta--primary" href="https://www.youtube.com/watch?v=wf1ajH-h7EQ" target="_blank" rel="noopener">Watch on YouTube</a>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <video class="video-frame" controls preload="metadata" poster="assets/album-cover.jpg">
+              <source src="assets/PARALLEL720.mp4" type="video/mp4" />
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <div class="video-card__copy">
+              <p class="video-card__eyebrow">Embedded asset</p>
+              <h3>Parallel</h3>
+              <p>Un second bloc vidéo, plus direct, pour exploiter les assets du repo sans casser la lisibilité générale.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="videos" class="section">
+    <section class="section" aria-label="Galerie visuelle">
       <div class="container">
-        <h2 class="section-title">Videos</h2>
-        <p class="section-intro">Clip officiel + visualizer.</p>
-        <div class="video-grid">
-          <div>
-            <div class="video-embed">
-              <iframe src="https://www.youtube.com/embed/wf1ajH-h7EQ" title="Break The Mirror (Official Video)" loading="lazy" allowfullscreen></iframe>
-            </div>
-          </div>
-          <div>
-            <div class="video-embed">
-              <video controls preload="metadata" poster="assets/album-cover.jpg">
-                <source src="assets/PARALLEL720.mp4" type="video/mp4" />
-                Votre navigateur ne supporte pas la vidéo.
-              </video>
-            </div>
-          </div>
+        <div class="section-heading">
+          <p class="section-kicker">Gallery</p>
+          <h2 class="section-title">Live frames</h2>
+          <p class="section-intro">Trois images suffisent pour donner du relief à la page sans la transformer en portfolio bavard.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <img src="assets/gallery/18-silent-injury-live-arthur-delorme-charles-rousseau-guitares-noir-blanc.webp" alt="Silent Injury sur scène, guitares en noir et blanc" loading="lazy" />
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/gallery/09-silent-injury-live-scene-public-coulisses-noir-blanc.webp" alt="Silent Injury sur scène vu depuis la salle" loading="lazy" />
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/gallery/11-silent-injury-live-thibault-vermot-bassiste-plongee-lumiere-bleue.webp" alt="Bassiste de Silent Injury sous lumière bleue" loading="lazy" />
+          </figure>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="container about">
-        <div>
+    <section id="about" class="section scroll-anchor">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Band</p>
           <h2 class="section-title">About</h2>
-          <p class="section-intro">Silent Injury, metalcore français : riffs massifs, refrains mélodiques, live incisif.</p>
-          <a class="cta" href="downloads/silent-injury-photos-hd.zip" download>Download HD photos</a>
+          <p class="section-intro">Quelques lignes, des preuves visuelles, et des points d’entrée concrets. Pas une bio interminable.</p>
         </div>
-        <div class="card">
-          <img src="assets/album-cover.jpg" alt="Cover Silent Injury" loading="lazy" />
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>Silent Injury avance sur une ligne claire : guitares serrées, voix qui tranche, mélodie tenue sans mollir. L’enjeu, ici, n’est pas de raconter toute l’histoire du groupe, mais de donner immédiatement sa texture et sa fonction : écouter, regarder, programmer.</p>
+            <p>La page reste compacte, verticale, pensée comme une landing page de groupe moderne : un hero massif, des sections courtes, des sorties visibles, un live lisible.</p>
+
+            <div class="about-metrics" aria-label="Repères du groupe">
+              <div class="metric">
+                <strong>FR</strong>
+                <span>Base géographique du projet</span>
+              </div>
+              <div class="metric">
+                <strong>EPK</strong>
+                <span>Presskit et tech rider disponibles</span>
+              </div>
+              <div class="metric">
+                <strong>Live</strong>
+                <span>Nouveau set en préparation</span>
+              </div>
+              <div class="metric">
+                <strong>Video</strong>
+                <span>Break The Mirror en avant</span>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <a class="cta" href="downloads/silent-injury-photos-hd.zip" download>Download HD photos</a>
+              <a class="cta" href="assets/silentinjury.mp3" target="_blank" rel="noopener">Audio asset</a>
+            </div>
+          </div>
+
+          <figure class="about-photo">
+            <img src="assets/gallery/band-photo-credits.jpg" alt="Photo du groupe Silent Injury en répétition live" loading="lazy" />
+          </figure>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section id="contact" class="section scroll-anchor">
       <div class="container">
-        <h2 class="section-title">EPK / Contact</h2>
-        <div class="card-grid">
-          <article class="card">
+        <div class="section-heading">
+          <p class="section-kicker">Press / booking</p>
+          <h2 class="section-title">EPK / Contact</h2>
+          <p class="section-intro">Fin de page nette : documents utiles, contact direct, rien qui disperse.</p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card">
             <h3>Press & Tech</h3>
-            <p>Téléchargez les documents complets du groupe.</p>
-            <div class="cta-row">
+            <p>Presskit, tech rider, photos HD : tout ce qu’il faut pour faire circuler le groupe proprement.</p>
+            <div class="contact-actions">
               <a class="cta" href="assets/presskit.pdf" target="_blank" rel="noopener">Presskit PDF</a>
               <a class="cta" href="assets/techrider.pdf" target="_blank" rel="noopener">Tech rider PDF</a>
+              <a class="cta" href="downloads/silent-injury-photos-hd.zip" download>HD photos</a>
             </div>
           </article>
-          <article class="card">
+
+          <article class="contact-card">
             <h3>Booking</h3>
-            <p>Réponse rapide pour concerts, interviews et partenariats.</p>
-            <a class="cta cta--primary" href="mailto:silentinjuryofficiel@gmail.com">silentinjuryofficiel@gmail.com</a>
+            <p>Concerts, interviews, partenariats : un seul point de contact, visible sans fouiller.</p>
+            <a class="cta cta--primary contact-email" href="mailto:silentinjuryofficiel@gmail.com?subject=Booking%20Silent%20Injury">silentinjuryofficiel@gmail.com</a>
+            <div class="footer__social" aria-label="Réseaux sociaux du groupe">
+              <a href="https://www.instagram.com/silentinjury_band/" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61552999371364" target="_blank" rel="noopener">Facebook</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-row">
+  <footer class="footer">
+    <div class="container footer__row">
       <small>© Silent Injury</small>
-      <div class="social-links" aria-label="Réseaux sociaux">
-        <a class="cta" href="https://www.instagram.com/silentinjury_band/" target="_blank" rel="noopener">Instagram</a>
-        <a class="cta" href="https://www.facebook.com/profile.php?id=61552999371364" target="_blank" rel="noopener">Facebook</a>
-        <a class="cta" href="/SILENT-MINISITE/en/">EN</a>
+      <div class="footer__social" aria-label="Navigation secondaire">
+        <a href="#release">Release</a>
+        <a href="#tour">Tour</a>
+        <a href="#music">Music</a>
+        <a href="#videos">Videos</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
 
   <script>
     const header = document.getElementById('siteHeader');
-    const menuToggle = document.getElementById('menuToggle');
+    const menuButton = document.getElementById('menuButton');
+    const menuClose = document.getElementById('menuClose');
     const menuOverlay = document.getElementById('menuOverlay');
 
-    const syncHeader = () => {
+    function syncHeader() {
       header.classList.toggle('is-scrolled', window.scrollY > 24);
-    };
+    }
 
-    const closeMenu = () => {
+    function openMenu() {
+      menuOverlay.classList.add('is-open');
+      menuOverlay.setAttribute('aria-hidden', 'false');
+      menuButton.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMenu() {
       menuOverlay.classList.remove('is-open');
       menuOverlay.setAttribute('aria-hidden', 'true');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    };
+      menuButton.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
 
-    menuToggle.addEventListener('click', () => {
-      const isOpen = menuOverlay.classList.toggle('is-open');
-      menuOverlay.setAttribute('aria-hidden', String(!isOpen));
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuOverlay.classList.contains('is-open');
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
+
+    menuClose.addEventListener('click', closeMenu);
 
     menuOverlay.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuOverlay.classList.contains('is-open')) {
+        closeMenu();
+      }
     });
 
     window.addEventListener('scroll', syncHeader, { passive: true });
